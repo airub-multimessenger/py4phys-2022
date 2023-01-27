@@ -61,7 +61,7 @@ class Detector:
         i = 0 # index up to which `data` is full
         while(i < n_ev - 1):
             n_dim = 3 # generating coordinates in three dimensions
-            sample = np.random.uniform(low=0.0, high=self.R, size=(n_ev, n_dim))
+            sample = np.random.uniform(low=-self.R, high=self.R, size=(n_ev, n_dim))
             # event axis: 0, coordinate axis: 1
             # we calculate the norm along axis 1 (coordinates) to get the radius
             valid_elements = np.linalg.norm(sample, axis=1) < self.R
@@ -75,7 +75,7 @@ class Detector:
             i += min(m,n)
             
         for q in ['d_x', 'd_y', 'd_z']:
-            data[q] = self.rng.uniform(low=0.0, high=1.0, size=n_ev)
+            data[q] = self.rng.uniform(low=-1.0, high=1.0, size=n_ev)
 
         data['E_true'] = self.bg.generate_true_energy(n_ev)
 
